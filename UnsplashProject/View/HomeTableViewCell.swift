@@ -33,11 +33,8 @@ class HomeTableViewCell: UITableViewCell {
         button.backgroundColor = .systemGray5
         button.alpha = 0.5
         button.tintColor = .black
-        if #available(iOS 15.0, *) {
-            button.configuration?.cornerStyle = .dynamic
-            button.layer.cornerRadius = 5
-        }
-       // button.
+        button.configuration?.cornerStyle = .dynamic
+        button.layer.cornerRadius = 5
         return button
     }()
     func setupViews() {

@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func setupWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController  = TabBarController()
+        window?.rootViewController  = AuthViewController()
         window?.makeKeyAndVisible()
     }
 

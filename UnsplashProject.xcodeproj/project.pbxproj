@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C395EE44286C7C7C00BF1B7D /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C395EE43286C7C7B00BF1B7D /* AuthViewController.swift */; };
 		C3BD96062869EE6300B36883 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BD96052869EE6300B36883 /* AppDelegate.swift */; };
 		C3BD960F2869EE6700B36883 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3BD960E2869EE6700B36883 /* Assets.xcassets */; };
 		C3BD96122869EE6700B36883 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3BD96102869EE6700B36883 /* LaunchScreen.storyboard */; };
@@ -20,6 +21,8 @@
 		C3BD962C286A335100B36883 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BD962B286A335100B36883 /* NetworkService.swift */; };
 		C3BD962E286A33A500B36883 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BD962D286A33A500B36883 /* ModelManager.swift */; };
 		C3BD9631286A3D3D00B36883 /* ImageRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BD9630286A3D3D00B36883 /* ImageRealm.swift */; };
+		C3BDEB42286DD25A00023A14 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BDEB41286DD25A00023A14 /* AuthService.swift */; };
+		C3BDEB53286E21B200023A14 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BDEB52286E21B200023A14 /* Constants.swift */; };
 		C3C7D3FA9F7FB479ED24DF64 /* Pods_UnsplashProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82677BF5BCBD9FC72AB038A6 /* Pods_UnsplashProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +30,7 @@
 		82677BF5BCBD9FC72AB038A6 /* Pods_UnsplashProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnsplashProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1A6680464D69B09C6333C7 /* Pods-UnsplashProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnsplashProject.release.xcconfig"; path = "Target Support Files/Pods-UnsplashProject/Pods-UnsplashProject.release.xcconfig"; sourceTree = "<group>"; };
 		A662EF9E4C7DEAFBBEAB3ED2 /* Pods-UnsplashProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnsplashProject.debug.xcconfig"; path = "Target Support Files/Pods-UnsplashProject/Pods-UnsplashProject.debug.xcconfig"; sourceTree = "<group>"; };
+		C395EE43286C7C7B00BF1B7D /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		C3BD96022869EE6300B36883 /* UnsplashProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnsplashProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3BD96052869EE6300B36883 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3BD960E2869EE6700B36883 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -42,6 +46,9 @@
 		C3BD962B286A335100B36883 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		C3BD962D286A33A500B36883 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		C3BD9630286A3D3D00B36883 /* ImageRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRealm.swift; sourceTree = "<group>"; };
+		C3BDEB41286DD25A00023A14 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		C3BDEB52286E21B200023A14 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C3BDEB58286E40A500023A14 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +74,7 @@
 		C3BD95F92869EE6300B36883 = {
 			isa = PBXGroup;
 			children = (
+				C3BDEB58286E40A500023A14 /* Config.xcconfig */,
 				C3BD96042869EE6300B36883 /* UnsplashProject */,
 				C3BD96032869EE6300B36883 /* Products */,
 				CD163D06AA937E99B1DC0F2D /* Pods */,
@@ -108,6 +116,7 @@
 		C3BD96222869F5B300B36883 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C395EE43286C7C7B00BF1B7D /* AuthViewController.swift */,
 				C3BD96192869EEAD00B36883 /* TabBarController.swift */,
 				C3BD961B2869EF1200B36883 /* HomeViewController.swift */,
 				C3BD96232869F66200B36883 /* FavoriteViewController.swift */,
@@ -128,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				C3BD962B286A335100B36883 /* NetworkService.swift */,
+				C3BDEB41286DD25A00023A14 /* AuthService.swift */,
 				C3BD962D286A33A500B36883 /* ModelManager.swift */,
 			);
 			path = Services;
@@ -139,6 +149,7 @@
 				C3BD960E2869EE6700B36883 /* Assets.xcassets */,
 				C3BD96052869EE6300B36883 /* AppDelegate.swift */,
 				C3BD96102869EE6700B36883 /* LaunchScreen.storyboard */,
+				C3BDEB52286E21B200023A14 /* Constants.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -270,6 +281,8 @@
 				C3BD961C2869EF1200B36883 /* HomeViewController.swift in Sources */,
 				C3BD961A2869EEAE00B36883 /* TabBarController.swift in Sources */,
 				C3BD96062869EE6300B36883 /* AppDelegate.swift in Sources */,
+				C395EE44286C7C7C00BF1B7D /* AuthViewController.swift in Sources */,
+				C3BDEB53286E21B200023A14 /* Constants.swift in Sources */,
 				C3BD9631286A3D3D00B36883 /* ImageRealm.swift in Sources */,
 				C3BD962C286A335100B36883 /* NetworkService.swift in Sources */,
 				C3BD96262869F6A500B36883 /* FavoriteCollectionViewCell.swift in Sources */,
@@ -277,6 +290,7 @@
 				C3BD962E286A33A500B36883 /* ModelManager.swift in Sources */,
 				C3BD96212869F50400B36883 /* StackViewExtension.swift in Sources */,
 				C3BD9629286A303100B36883 /* ImageModel.swift in Sources */,
+				C3BDEB42286DD25A00023A14 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +310,7 @@
 /* Begin XCBuildConfiguration section */
 		C3BD96142869EE6700B36883 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3BDEB58286E40A500023A14 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -356,6 +371,7 @@
 		};
 		C3BD96152869EE6700B36883 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3BDEB58286E40A500023A14 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

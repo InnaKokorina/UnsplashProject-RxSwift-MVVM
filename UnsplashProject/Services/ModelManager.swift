@@ -7,6 +7,8 @@
 
 import Foundation
 import RealmSwift
+
+
 protocol ModelManagerDelegate: AnyObject {
     func dataDidRecive(data: List<ImageRealm>)
     func dataDidReciveImagesFromDataBase(data: Results<ImageRealm>)
@@ -16,9 +18,9 @@ class ModelManager {
     weak var delegate: ModelManagerDelegate?
     private let realm = try! Realm()
        
-    func getImagesFromNetwork() {
+    func getImagesFromNetwork(url: URL) {
         let imagesArray = List<ImageRealm>()
-        let url = URL(string: "YOURURL")!
+        let url = URL(string: "https://api.unsplash.com/photos/?client_id=\(Constants.accessKey ?? "")")!
         NetworkService.shared.getImagesData(url: url) { [unowned self] data in
             guard let resultData = data
             else {

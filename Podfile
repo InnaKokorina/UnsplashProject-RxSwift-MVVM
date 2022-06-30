@@ -9,4 +9,5 @@ target 'UnsplashProject' do
 pod 'RealmSwift'
 pod 'SnapKit', '~> 5.0.0'
 pod 'Kingfisher'
+ pod 'Alamofire', '~> 5.4'
 end

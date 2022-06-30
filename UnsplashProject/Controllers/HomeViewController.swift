@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     private var images: Results<ImageRealm>?
     private let realm = try! Realm()
     weak var delegate: HomeViewControllerDelegate?
+    var token: String?
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.cellId)
@@ -50,7 +51,7 @@ class HomeViewController: UIViewController {
     }
     func loadPosts() {
         if realm.isEmpty {
-        modelManager.getImagesFromNetwork()
+        modelManager.getImagesFromNetwork(url: URL(string: "https://api.unsplash.com/photos/?client_id=\(token!)")!)
         } else {
             modelManager.fetchImagesFromDataBase()
         }
@@ -137,5 +138,4 @@ extension HomeViewController: UISearchBarDelegate {
         }
     }
 }
-
 

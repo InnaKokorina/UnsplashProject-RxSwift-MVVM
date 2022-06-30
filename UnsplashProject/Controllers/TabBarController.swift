@@ -7,8 +7,9 @@
 
 import UIKit
 
-
 class TabBarController: UITabBarController {
+    var token = ""
+// MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.tintColor = .white
@@ -16,8 +17,9 @@ class TabBarController: UITabBarController {
         self.tabBarItem.imageInsets = UIEdgeInsets(top: -10, left: 0, bottom: -4, right: 0)
         setupViewControllers()
         customTabAndNavigationBar()
+        print("tabbar token=\(token)")
     }
-
+    // MARK: - setupViewControllers
     func setupViewControllers() {
         let homeVC = HomeViewController()
         let favoriteVC = FavoriteViewController()
@@ -26,6 +28,7 @@ class TabBarController: UITabBarController {
         let favoriteVCNav = UINavigationController(rootViewController: favoriteVC)
         homeVC.delegate = favoriteVC
         favoriteVC.delegate = homeVC
+        homeVC.token = token
         setViewControllers([homeNavVC, favoriteVCNav], animated: true)
         guard let items = self.tabBar.items else { return }
         let images = ["house", "bookmark"]
@@ -34,25 +37,25 @@ class TabBarController: UITabBarController {
             items[index].image = UIImage(systemName: images[index])
             items[index].title = title[index]
         }
-        
     }
+    // MARK: - customTabAndNavigationBar
     func customTabAndNavigationBar(){
         if #available(iOS 15, *) {
-                        let navigationBarAppearance = UINavigationBarAppearance()
-                        navigationBarAppearance.configureWithOpaqueBackground()
-                        navigationBarAppearance.titleTextAttributes = [
-                            NSAttributedString.Key.foregroundColor : UIColor.white
-                        ]
-                        navigationBarAppearance.backgroundColor = UIColor.black
-                        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-                        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
-                        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-                    
-                    let tabBarApperance = UITabBarAppearance()
-                    tabBarApperance.configureWithOpaqueBackground()
-                    tabBarApperance.backgroundColor = UIColor.black
-                    UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
-                    UITabBar.appearance().standardAppearance = tabBarApperance
-                }
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithOpaqueBackground()
+            navigationBarAppearance.titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor : UIColor.white
+            ]
+            navigationBarAppearance.backgroundColor = UIColor.black
+            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+            
+            let tabBarApperance = UITabBarAppearance()
+            tabBarApperance.configureWithOpaqueBackground()
+            tabBarApperance.backgroundColor = UIColor.black
+            UITabBar.appearance().scrollEdgeAppearance = tabBarApperance
+            UITabBar.appearance().standardAppearance = tabBarApperance
+        }
     }
 }
