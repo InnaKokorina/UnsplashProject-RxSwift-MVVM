@@ -59,7 +59,6 @@ class FavoriteCollectionViewCell: UICollectionViewCell {
         favoriteImage.image = nil
     }
     @objc func deletePressed() {
-        print("и тут сработало")
         deleteButtonTap?()
     }
 }

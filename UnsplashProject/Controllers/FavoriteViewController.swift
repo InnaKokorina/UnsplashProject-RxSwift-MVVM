@@ -55,7 +55,6 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         if let images = favoriteImages {
             cell.configure(image: images[indexPath.row])
             cell.deleteButtonTap = {
-               print("сработало")
                 do {
                     try self.realm.write {
                         images[indexPath.row].isSaved.toggle()
@@ -103,17 +102,7 @@ extension FavoriteViewController {
 // MARK: - navigationItems
 extension FavoriteViewController {
     func setupNavItems() {
-        let logOutButton = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logOutButtonPressed))
-        logOutButton.tintColor = .white
-        navigationItem.rightBarButtonItem  = logOutButton
         navigationItem.title = "Saved"
-    }
-    @objc func logOutButtonPressed(_ sender: Any) {
-        do {
-            navigationController?.popViewController(animated: true)
-        } catch {
-            print(error)
-        }
     }
 }
 
