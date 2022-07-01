@@ -32,6 +32,7 @@ class HomeViewController: UIViewController {
         searchBar.searchTextField.textColor = .white
         return searchBar
     }()
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewsSetup()
@@ -44,14 +45,14 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .black
         view.addSubview(tableView)
         tableView.dataSource = self
-        tableView.delegate = self  
+        tableView.delegate = self
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     func loadPosts() {
         if realm.isEmpty {
-        modelManager.getImagesFromNetwork(url: URL(string: "https://api.unsplash.com/photos/?client_id=\(token!)")!)
+        modelManager.getImagesFromNetwork(url: URL(string: "\(Constants.url)\(self.token!)")!)
         } else {
             modelManager.fetchImagesFromDataBase()
         }
@@ -91,15 +92,16 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 }
+// MARK: - ModelManagerDelegate
 extension HomeViewController: ModelManagerDelegate {
     func dataDidReciveImagesFromDataBase(data: Results<ImageRealm>) {
-        self.images = data
+        self.images = data.sorted(byKeyPath: "id", ascending: false)
         DispatchQueue.main.async {[weak self] in
             self?.tableView.reloadData()
         }
     }
     
-    func dataDidRecive(data: List<ImageRealm>) {
+    func dataDidRecive() {
         modelManager.fetchImagesFromDataBase()
     }
 }
@@ -116,10 +118,6 @@ extension HomeViewController {
         navigationController?.navigationBar.backgroundColor = .black
         searchBar.sizeToFit()
         navigationItem.titleView = searchBar
-        UINavigationBar.appearance().backgroundColor = .black
-        UINavigationBar.appearance().barTintColor = .white
-        UINavigationBar.appearance().isTranslucent = false
-        UIBarButtonItem.appearance().tintColor = .white
     }
 }
 // MARK: - UISearchBarDelegate

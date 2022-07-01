@@ -10,7 +10,7 @@ import RealmSwift
 
 
 protocol ModelManagerDelegate: AnyObject {
-    func dataDidRecive(data: List<ImageRealm>)
+    func dataDidRecive()
     func dataDidReciveImagesFromDataBase(data: Results<ImageRealm>)
 }
 
@@ -34,7 +34,7 @@ class ModelManager {
             }
             DispatchQueue.main.async { [unowned self] in
             self.saveImagesToDataBase(model: imagesArray)
-            self.delegate?.dataDidRecive(data: imagesArray)
+            self.delegate?.dataDidRecive()
             }
         }
     }

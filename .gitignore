@@ -1,6 +1,5 @@
 #Gitignore from https://github.com/github/gitignore/blob/master/Swift.gitignore
 .DS_Store
-Config.xcconfig
 .Trashes
 *.swp
 ## Build generated

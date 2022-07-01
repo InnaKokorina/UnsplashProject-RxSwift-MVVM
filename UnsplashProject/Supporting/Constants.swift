@@ -12,4 +12,5 @@ struct Constants {
     static let accessKey = Bundle.main.infoDictionary?["ACCESS_KEY"] as? String
     static let secretKey = Bundle.main.infoDictionary?["SECRET_KEY"] as? String
     static let grant_type = "authorization_code"
+    static let url = "https://api.unsplash.com/photos/?client_id="
 }

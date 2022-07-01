@@ -48,7 +48,7 @@
 		C3BD9630286A3D3D00B36883 /* ImageRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRealm.swift; sourceTree = "<group>"; };
 		C3BDEB41286DD25A00023A14 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		C3BDEB52286E21B200023A14 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		C3BDEB58286E40A500023A14 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		C3BDEB5B286E50A100023A14 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +74,7 @@
 		C3BD95F92869EE6300B36883 = {
 			isa = PBXGroup;
 			children = (
-				C3BDEB58286E40A500023A14 /* Config.xcconfig */,
+				C3BDEB5B286E50A100023A14 /* Config.xcconfig */,
 				C3BD96042869EE6300B36883 /* UnsplashProject */,
 				C3BD96032869EE6300B36883 /* Products */,
 				CD163D06AA937E99B1DC0F2D /* Pods */,
@@ -310,7 +310,7 @@
 /* Begin XCBuildConfiguration section */
 		C3BD96142869EE6700B36883 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C3BDEB58286E40A500023A14 /* Config.xcconfig */;
+			baseConfigurationReference = C3BDEB5B286E50A100023A14 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -371,7 +371,7 @@
 		};
 		C3BD96152869EE6700B36883 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C3BDEB58286E40A500023A14 /* Config.xcconfig */;
+			baseConfigurationReference = C3BDEB5B286E50A100023A14 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

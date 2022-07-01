@@ -18,7 +18,7 @@ class FavoriteViewController: UIViewController {
     private var favoriteImages: Results<ImageRealm>?
     private let realm = try! Realm()
     weak var delegate: FavoriteViewControllerDelegate?
-    
+    // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
@@ -64,11 +64,11 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
                 } catch {
                     print("Error saving Data context \(error)")
                 }
-                
             }
         }
             return cell
     }
+    // MARK: - collectionView set layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }

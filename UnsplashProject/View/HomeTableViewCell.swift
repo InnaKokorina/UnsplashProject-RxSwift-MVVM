@@ -25,8 +25,7 @@ class HomeTableViewCell: UITableViewCell {
         label.textColor = .white
         label.textAlignment = .left
         return label
-    }() 
-    
+    }()
     private lazy var stackView = UIStackView(arrangedSubviews: [photoImage, descriptionLabel], axis: .vertical, spacing: 8)
     let favoriteButton: UIButton = {
         let button = UIButton()
@@ -49,7 +48,6 @@ class HomeTableViewCell: UITableViewCell {
         selectionStyle = .none
         favoriteButton.addTarget(self, action: #selector(savePressed), for: .touchUpInside)
     }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

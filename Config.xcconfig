@@ -1,0 +1,13 @@
+//
+//  Config.xcconfig
+//  UnsplashProject
+//
+//  Created by Inna Kokorina on 01.07.2022.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+ACCESS_KEY = eqZnDCT8Qf7cKopB9K8xral5FE9dC1k7U25CbdMrLrc
+SECRET_KEY = 445fXtXdw3QQMywJ77zzli_zeCcaHIH3YAhCBPS1W80
+REDIRECT_URL = urn:ietf:wg:oauth:2.0:oob
