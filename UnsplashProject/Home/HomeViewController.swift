@@ -9,7 +9,7 @@ import SnapKit
 
 class HomeViewController: UIViewController {
    
-    var viewModel: HomeViewModel?
+    var viewModel: HomeViewModelProtocol?
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -57,7 +57,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
-       return viewModel.getImagesCount(images: viewModel.images)
+       return viewModel.getImagesCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

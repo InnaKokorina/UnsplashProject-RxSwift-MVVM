@@ -9,11 +9,19 @@ import Foundation
 import SnapKit
 import RealmSwift
 
+protocol HomeViewModelProtocol {
+    var reloadList: (() -> ()) { get set }
+    var images: Results<ImageRealm>? { get set}
+    func fetchData()
+    func updateFavorite(index: Int, completion: ((Bool) -> ()))
+    func getImagesCount() -> Int
+}
+
 protocol HomeViewControllerDelegate: AnyObject {
     func saveFavoriteImages(favorite: Results<ImageRealm>?)
 }
 
-class HomeViewModel {
+class HomeViewModel: HomeViewModelProtocol {
     private var interactor = Interactor()
     private let realm = try! Realm()
     weak var delegate: HomeViewControllerDelegate?
@@ -36,7 +44,7 @@ class HomeViewModel {
         delegate?.saveFavoriteImages(favorite: images?.filter("isSaved=%@", true))
     }
   
-    func getImagesCount(images: Results<ImageRealm>?) -> Int {
+    func getImagesCount() -> Int {
         if let loadedImages = images {
             return loadedImages.count
         } else {

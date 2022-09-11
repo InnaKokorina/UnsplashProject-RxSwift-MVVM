@@ -8,6 +8,11 @@
 import Foundation
 import RealmSwift
 
+//protocol InteractorProtocol {
+//    func getImagesFromNetwork(url: URL, completion: @escaping (() ->()))
+//    func fetchImagesFromDataBase(completion: ((Results<ImageRealm>) -> ()))
+//}
+
 class Interactor {
     private let realm = try! Realm()
     

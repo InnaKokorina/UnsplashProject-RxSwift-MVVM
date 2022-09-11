@@ -8,11 +8,18 @@
 import Foundation
 import RealmSwift
 
+protocol FavoriteViewModelProtocol {
+    var reloadList: (() -> ()) { get set }
+    var favoriteImages: Results<ImageRealm>? { get set }
+    func getFavoriteImagesCount() -> Int
+    func deleteFavorite(index: Int, completion: (() -> ()))
+}
+
 protocol FavoriteViewModelDelegate: AnyObject {
     func deteleFromFavorite(images: Results<ImageRealm>?)
 }
 
-class FavoriteViewModel {
+class FavoriteViewModel: FavoriteViewModelProtocol {
     private let realm = try! Realm()
     weak var delegate: FavoriteViewModelDelegate?
     var reloadList = {() -> () in }
@@ -47,6 +54,5 @@ class FavoriteViewModel {
 extension FavoriteViewModel: HomeViewControllerDelegate {
     func saveFavoriteImages(favorite: Results<ImageRealm>?) {
         favoriteImages = favorite?.filter("isSaved=%@", true)
-
     }
 }

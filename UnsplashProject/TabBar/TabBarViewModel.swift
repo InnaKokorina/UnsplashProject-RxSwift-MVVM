@@ -14,16 +14,22 @@ class TabBarViewModel {
     func setupViewControllers() -> [UIViewController] {
         let homeVC = HomeViewController()
         let favoriteVC = FavoriteViewController()
+        
         let homeNavVC = UINavigationController(rootViewController: homeVC)
         homeNavVC.navigationBar.backgroundColor = .black
         let favoriteVCNav = UINavigationController(rootViewController: favoriteVC)
-        homeVC.viewModel = HomeViewModel()
-        favoriteVC.viewModel = FavoriteViewModel()
         
-        homeVC.viewModel?.delegate = favoriteVC.viewModel
-        homeVC.viewModel?.token = token
+        let homeViewModel = HomeViewModel()
+        let favoriteViewModel = FavoriteViewModel()
         
-        favoriteVC.viewModel.delegate = homeVC.viewModel
+        homeVC.viewModel = homeViewModel
+        favoriteVC.viewModel = favoriteViewModel
+        
+        homeViewModel.delegate = favoriteViewModel
+        homeViewModel.token = token
+        
+        favoriteViewModel.delegate = homeViewModel
+        
         return [homeNavVC, favoriteVCNav]
     }
 }

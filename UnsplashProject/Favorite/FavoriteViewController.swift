@@ -12,7 +12,7 @@ import RealmSwift
 class FavoriteViewController: UIViewController {
     private var collectionView: UICollectionView?
     private var didSetupConstraints = false
-    var viewModel = FavoriteViewModel()
+    var viewModel: FavoriteViewModelProtocol?
     
     // MARK: - lifecycle
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ class FavoriteViewController: UIViewController {
         collectionView?.backgroundColor = .black
     }
     func loadPosts() {
-        viewModel.reloadList = { [weak self] ()  in
+        viewModel?.reloadList = { [weak self] ()  in
             DispatchQueue.main.async {
                 self?.collectionView?.reloadData()
             }
@@ -43,15 +43,16 @@ class FavoriteViewController: UIViewController {
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.getFavoriteImagesCount()
+        guard let viewModel = viewModel else { return 0 }
+        return viewModel.getFavoriteImagesCount()
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCollectionViewCell.cellId, for: indexPath) as? FavoriteCollectionViewCell else { return UICollectionViewCell() }
-        if let images = viewModel.favoriteImages {
+        if let images = viewModel?.favoriteImages {
             cell.configure(image: images[indexPath.row])
             cell.deleteButtonTap = {
-                self.viewModel.deleteFavorite(index: indexPath.row) {
+                self.viewModel?.deleteFavorite(index: indexPath.row) {
                     collectionView.reloadItems(at: [indexPath])
                 }
             }
