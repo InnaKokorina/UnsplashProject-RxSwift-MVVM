@@ -7,16 +7,12 @@
 import UIKit
 import SnapKit
 import RealmSwift
-protocol HomeViewControllerDelegate: AnyObject {
-    func saveFavoriteImages(favorite: Results<ImageRealm>?)
-}
 
 class HomeViewController: UIViewController {
-    private let modelManager = ModelManager()
-    private var images: Results<ImageRealm>?
-    private let realm = try! Realm()
-    weak var delegate: HomeViewControllerDelegate?
-    var token: String?
+   
+    var viewModel: HomeViewModel?
+  //  weak var delegate: HomeViewControllerDelegate?
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.cellId)
@@ -34,14 +30,15 @@ class HomeViewController: UIViewController {
     }()
     // MARK: - Lifecycle
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+
         tableViewsSetup()
         setupNavItems()
-        modelManager.delegate = self
         searchBar.delegate = self
         loadPosts()
     }
-    func tableViewsSetup() {
+    private func tableViewsSetup() {
         view.backgroundColor = .black
         view.addSubview(tableView)
         tableView.dataSource = self
@@ -50,61 +47,45 @@ class HomeViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    func loadPosts() {
-        if realm.isEmpty {
-        modelManager.getImagesFromNetwork(url: URL(string: "\(Constants.url)\(self.token!)")!)
-        } else {
-            modelManager.fetchImagesFromDataBase()
-        }
-        delegate?.saveFavoriteImages(favorite: images?.filter("isSaved=%@", true))
-       
+    private func loadPosts() {
+        viewModel?.fetchData()
+            viewModel?.reloadList = { [weak self] ()  in
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            }
+    //   tableView.reloadData()
     }
 }
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let loadedImages = images {
-            return loadedImages.count
-        } else {
-            return 0
-        }
+        guard let viewModel = viewModel else { return 0 }
+        print(viewModel.getImagesCount(images: viewModel.images))
+       return viewModel.getImagesCount(images: viewModel.images)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.cellId, for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
-        if let loadedImages = images {
+        
+        if let loadedImages = viewModel?.images {
             cell.configure(image: loadedImages[indexPath.row])
             cell.saveButtonTap = {
-                do {
-                    try self.realm.write {
-                        loadedImages[indexPath.row].isSaved.toggle()
-                        if loadedImages[indexPath.row].isSaved {
-                            cell.favoriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)     
-                        } else {
-                            cell.favoriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
-                        }
-                        self.delegate?.saveFavoriteImages(favorite: self.images)
+                self.viewModel?.updateFavorite(loadedImages: loadedImages, index: indexPath.row) { saved in
+                    if saved {
+                        cell.favoriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+                    } else {
+                        cell.favoriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
                     }
-                } catch {
-                    print("Error saving Data context \(error)")
+            //        self.delegate?.saveFavoriteImages(favorite: loadedImages)
                 }
+                
             }
         }
         return cell
     }
 }
 // MARK: - ModelManagerDelegate
-extension HomeViewController: ModelManagerDelegate {
-    func dataDidReciveImagesFromDataBase(data: Results<ImageRealm>) {
-        self.images = data.sorted(byKeyPath: "id", ascending: false)
-        DispatchQueue.main.async {[weak self] in
-            self?.tableView.reloadData()
-        }
-    }
-    
-    func dataDidRecive() {
-        modelManager.fetchImagesFromDataBase()
-    }
-}
+
 extension HomeViewController: FavoriteViewControllerDelegate {
     func deteleFromFavorite() {
         DispatchQueue.main.async {[weak self] in
@@ -123,7 +104,7 @@ extension HomeViewController {
 // MARK: - UISearchBarDelegate
 extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        images = images?.filter("user CONTAINS[cd] %@", searchBar.text!)
+        viewModel?.images = viewModel?.images?.filter("user CONTAINS[cd] %@", searchBar.text!)
         tableView.reloadData()
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -136,4 +117,3 @@ extension HomeViewController: UISearchBarDelegate {
         }
     }
 }
-

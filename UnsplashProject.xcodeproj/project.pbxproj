@@ -19,11 +19,12 @@
 		C3BD96262869F6A500B36883 /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BD96252869F6A500B36883 /* FavoriteCollectionViewCell.swift */; };
 		C3BD9629286A303100B36883 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BD9628286A303100B36883 /* ImageModel.swift */; };
 		C3BD962C286A335100B36883 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BD962B286A335100B36883 /* NetworkService.swift */; };
-		C3BD962E286A33A500B36883 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BD962D286A33A500B36883 /* ModelManager.swift */; };
+		C3BD962E286A33A500B36883 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BD962D286A33A500B36883 /* HomeInteractor.swift */; };
 		C3BD9631286A3D3D00B36883 /* ImageRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BD9630286A3D3D00B36883 /* ImageRealm.swift */; };
 		C3BDEB42286DD25A00023A14 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BDEB41286DD25A00023A14 /* AuthService.swift */; };
 		C3BDEB53286E21B200023A14 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BDEB52286E21B200023A14 /* Constants.swift */; };
 		C3C7D3FA9F7FB479ED24DF64 /* Pods_UnsplashProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82677BF5BCBD9FC72AB038A6 /* Pods_UnsplashProject.framework */; };
+		F7CCCA8E28CDFE5900476BEE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCCA8D28CDFE5900476BEE /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,11 +45,12 @@
 		C3BD96252869F6A500B36883 /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		C3BD9628286A303100B36883 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		C3BD962B286A335100B36883 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		C3BD962D286A33A500B36883 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		C3BD962D286A33A500B36883 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		C3BD9630286A3D3D00B36883 /* ImageRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRealm.swift; sourceTree = "<group>"; };
 		C3BDEB41286DD25A00023A14 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		C3BDEB52286E21B200023A14 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C3BDEB5B286E50A100023A14 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		F7CCCA8D28CDFE5900476BEE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,11 +95,14 @@
 		C3BD96042869EE6300B36883 /* UnsplashProject */ = {
 			isa = PBXGroup;
 			children = (
+				F7CCCA8C28CDFAD700476BEE /* TabBar */,
+				F7CCCA8B28CDFAD200476BEE /* Auth */,
+				F7CCCA8A28CDFACF00476BEE /* Home */,
+				F7CCCA8928CDFAC900476BEE /* Favorite */,
 				C3BD96132869EE6700B36883 /* Info.plist */,
 				C3BD962F286A3CD500B36883 /* Supporting */,
 				C3BD962A286A334100B36883 /* Services */,
 				C3BD9627286A2D2900B36883 /* Model */,
-				C3BD96222869F5B300B36883 /* Controllers */,
 				C3BD961F2869F4DC00B36883 /* View */,
 			);
 			path = UnsplashProject;
@@ -107,21 +112,8 @@
 			isa = PBXGroup;
 			children = (
 				C3BD96202869F50400B36883 /* StackViewExtension.swift */,
-				C3BD961D2869F01900B36883 /* HomeTableViewCell.swift */,
-				C3BD96252869F6A500B36883 /* FavoriteCollectionViewCell.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		C3BD96222869F5B300B36883 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				C395EE43286C7C7B00BF1B7D /* AuthViewController.swift */,
-				C3BD96192869EEAD00B36883 /* TabBarController.swift */,
-				C3BD961B2869EF1200B36883 /* HomeViewController.swift */,
-				C3BD96232869F66200B36883 /* FavoriteViewController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		C3BD9627286A2D2900B36883 /* Model */ = {
@@ -138,7 +130,6 @@
 			children = (
 				C3BD962B286A335100B36883 /* NetworkService.swift */,
 				C3BDEB41286DD25A00023A14 /* AuthService.swift */,
-				C3BD962D286A33A500B36883 /* ModelManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -161,6 +152,42 @@
 				8D1A6680464D69B09C6333C7 /* Pods-UnsplashProject.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F7CCCA8928CDFAC900476BEE /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				C3BD96252869F6A500B36883 /* FavoriteCollectionViewCell.swift */,
+				C3BD96232869F66200B36883 /* FavoriteViewController.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
+		F7CCCA8A28CDFACF00476BEE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				C3BD961B2869EF1200B36883 /* HomeViewController.swift */,
+				C3BD961D2869F01900B36883 /* HomeTableViewCell.swift */,
+				C3BD962D286A33A500B36883 /* HomeInteractor.swift */,
+				F7CCCA8D28CDFE5900476BEE /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		F7CCCA8B28CDFAD200476BEE /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				C395EE43286C7C7B00BF1B7D /* AuthViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		F7CCCA8C28CDFAD700476BEE /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				C3BD96192869EEAD00B36883 /* TabBarController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,9 +314,10 @@
 				C3BD962C286A335100B36883 /* NetworkService.swift in Sources */,
 				C3BD96262869F6A500B36883 /* FavoriteCollectionViewCell.swift in Sources */,
 				C3BD96242869F66200B36883 /* FavoriteViewController.swift in Sources */,
-				C3BD962E286A33A500B36883 /* ModelManager.swift in Sources */,
+				C3BD962E286A33A500B36883 /* HomeInteractor.swift in Sources */,
 				C3BD96212869F50400B36883 /* StackViewExtension.swift in Sources */,
 				C3BD9629286A303100B36883 /* ImageModel.swift in Sources */,
+				F7CCCA8E28CDFE5900476BEE /* HomeViewModel.swift in Sources */,
 				C3BDEB42286DD25A00023A14 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

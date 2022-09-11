@@ -26,9 +26,10 @@ class TabBarController: UITabBarController {
         let homeNavVC = UINavigationController(rootViewController: homeVC)
         homeNavVC.navigationBar.backgroundColor = .black
         let favoriteVCNav = UINavigationController(rootViewController: favoriteVC)
-        homeVC.delegate = favoriteVC
+        homeVC.viewModel = HomeViewModel()
+        homeVC.viewModel?.delegate = favoriteVC
         favoriteVC.delegate = homeVC
-        homeVC.token = token
+        homeVC.viewModel?.token = token
         setViewControllers([homeNavVC, favoriteVCNav], animated: true)
         guard let items = self.tabBar.items else { return }
         let images = ["house", "bookmark"]

@@ -6,8 +6,8 @@ target 'UnsplashProject' do
   use_frameworks!
 
   # Pods for UnsplashProject
-pod 'RealmSwift'
+pod 'RealmSwift', '10.27.0'
 pod 'SnapKit', '~> 5.0.0'
 pod 'Kingfisher'
- pod 'Alamofire', '~> 5.4'
+pod 'Alamofire', '~> 5.4'
 end
