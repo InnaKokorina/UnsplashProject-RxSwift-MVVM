@@ -10,7 +10,7 @@ import WebKit
 
 class AuthViewController: UIViewController {
     private var didSetupConstraints = false
-    private var authService = AuthService()
+   
     private let logoImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "unsplash2")
@@ -38,14 +38,7 @@ class AuthViewController: UIViewController {
         let webView = WKWebView()
         return webView
     }()
-    func addViews() {
-        view.addSubview(webView)
-        view.addSubview(logoImage)
-        view.addSubview(welcomeLabel)
-        view.addSubview(loginButton)
-        webView.isHidden = true
-        loginButton.addTarget(self, action: #selector(loginTap), for: .touchUpInside)
-    }
+    var viewModel = AuthViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,19 +47,24 @@ class AuthViewController: UIViewController {
         webView.navigationDelegate = self
     }
     
+    func addViews() {
+        view.addSubview(webView)
+        view.addSubview(logoImage)
+        view.addSubview(welcomeLabel)
+        view.addSubview(loginButton)
+        webView.isHidden = true
+        loginButton.addTarget(self, action: #selector(loginTap), for: .touchUpInside)
+    }
+
     @objc func loginTap() {
         webView.isHidden = false
         welcomeLabel.isHidden = true
         loginButton.isHidden = true
         logoImage.isHidden = true
-        webWiewLoad()
+        viewModel.webWiewLoad { request in
+            webView.load(request)
+        }
     }
-    func webWiewLoad() {
-        let url = URL(string: "https://unsplash.com/oauth/authorize?client_id=\(Constants.accessKey ?? "")&redirect_uri=\(Constants.redirectURL ?? "")&response_type=code&scope=public")!
-        let request = URLRequest(url: url)
-        webView.load(request)
-    }
-
 }
 // MARK: - setConstraints
 extension AuthViewController {
@@ -102,17 +100,15 @@ extension AuthViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         guard
             let currentURL = webView.url?.absoluteString,
-            let code = getQueryStringParameter(url: currentURL, param: "code")
+            let code = viewModel.getQueryStringParameter(url: currentURL, param: "code")
         else {return}
-        authService.fetchAccessToken(code: code) { [weak self] data in
+        viewModel.fetchToken(code: code) { [weak self] data in
+            
             let tabBarController = TabBarController()
-            tabBarController.token = data
+            tabBarController.viewModel.token = data
             tabBarController.modalPresentationStyle = .fullScreen
             self?.present(tabBarController, animated: true)
         }
     }
-    private func getQueryStringParameter(url: String, param: String) -> String? {
-        guard let url = URLComponents(string: url) else { return nil }
-        return url.queryItems?.first(where: { $0.name == param })?.value
-    }
 }
+

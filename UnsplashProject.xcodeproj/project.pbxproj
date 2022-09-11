@@ -25,6 +25,9 @@
 		C3BDEB53286E21B200023A14 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BDEB52286E21B200023A14 /* Constants.swift */; };
 		C3C7D3FA9F7FB479ED24DF64 /* Pods_UnsplashProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82677BF5BCBD9FC72AB038A6 /* Pods_UnsplashProject.framework */; };
 		F7CCCA8E28CDFE5900476BEE /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCCA8D28CDFE5900476BEE /* HomeViewModel.swift */; };
+		F7CCCA9028CDFF7C00476BEE /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCCA8F28CDFF7C00476BEE /* TabBarViewModel.swift */; };
+		F7CCCA9228CE02D800476BEE /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCCA9128CE02D800476BEE /* AuthViewModel.swift */; };
+		F7CCCA9428CE09D000476BEE /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7CCCA9328CE09D000476BEE /* FavoriteViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +54,9 @@
 		C3BDEB52286E21B200023A14 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C3BDEB5B286E50A100023A14 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		F7CCCA8D28CDFE5900476BEE /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		F7CCCA8F28CDFF7C00476BEE /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
+		F7CCCA9128CE02D800476BEE /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		F7CCCA9328CE09D000476BEE /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,8 +101,8 @@
 		C3BD96042869EE6300B36883 /* UnsplashProject */ = {
 			isa = PBXGroup;
 			children = (
-				F7CCCA8C28CDFAD700476BEE /* TabBar */,
 				F7CCCA8B28CDFAD200476BEE /* Auth */,
+				F7CCCA8C28CDFAD700476BEE /* TabBar */,
 				F7CCCA8A28CDFACF00476BEE /* Home */,
 				F7CCCA8928CDFAC900476BEE /* Favorite */,
 				C3BD96132869EE6700B36883 /* Info.plist */,
@@ -159,6 +165,7 @@
 			children = (
 				C3BD96252869F6A500B36883 /* FavoriteCollectionViewCell.swift */,
 				C3BD96232869F66200B36883 /* FavoriteViewController.swift */,
+				F7CCCA9328CE09D000476BEE /* FavoriteViewModel.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -166,10 +173,10 @@
 		F7CCCA8A28CDFACF00476BEE /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				C3BD961B2869EF1200B36883 /* HomeViewController.swift */,
 				C3BD961D2869F01900B36883 /* HomeTableViewCell.swift */,
-				C3BD962D286A33A500B36883 /* HomeInteractor.swift */,
+				C3BD961B2869EF1200B36883 /* HomeViewController.swift */,
 				F7CCCA8D28CDFE5900476BEE /* HomeViewModel.swift */,
+				C3BD962D286A33A500B36883 /* HomeInteractor.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -178,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				C395EE43286C7C7B00BF1B7D /* AuthViewController.swift */,
+				F7CCCA9128CE02D800476BEE /* AuthViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -186,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				C3BD96192869EEAD00B36883 /* TabBarController.swift */,
+				F7CCCA8F28CDFF7C00476BEE /* TabBarViewModel.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -304,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7CCCA9428CE09D000476BEE /* FavoriteViewModel.swift in Sources */,
 				C3BD961E2869F01900B36883 /* HomeTableViewCell.swift in Sources */,
 				C3BD961C2869EF1200B36883 /* HomeViewController.swift in Sources */,
 				C3BD961A2869EEAE00B36883 /* TabBarController.swift in Sources */,
@@ -311,7 +321,9 @@
 				C395EE44286C7C7C00BF1B7D /* AuthViewController.swift in Sources */,
 				C3BDEB53286E21B200023A14 /* Constants.swift in Sources */,
 				C3BD9631286A3D3D00B36883 /* ImageRealm.swift in Sources */,
+				F7CCCA9228CE02D800476BEE /* AuthViewModel.swift in Sources */,
 				C3BD962C286A335100B36883 /* NetworkService.swift in Sources */,
+				F7CCCA9028CDFF7C00476BEE /* TabBarViewModel.swift in Sources */,
 				C3BD96262869F6A500B36883 /* FavoriteCollectionViewCell.swift in Sources */,
 				C3BD96242869F66200B36883 /* FavoriteViewController.swift in Sources */,
 				C3BD962E286A33A500B36883 /* HomeInteractor.swift in Sources */,

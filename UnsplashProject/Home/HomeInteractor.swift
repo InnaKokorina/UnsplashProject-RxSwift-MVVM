@@ -8,23 +8,16 @@
 import Foundation
 import RealmSwift
 
-
-//protocol ModelManagerDelegate: AnyObject {
-//    func dataDidRecive()
-//    func dataDidReciveImagesFromDataBase(data: Results<ImageRealm>)
-//}
-
 class Interactor {
- //   weak var delegate: ModelManagerDelegate?
     private let realm = try! Realm()
-       
+    
     func getImagesFromNetwork(url: URL, completion: @escaping (() ->())) {
         let imagesArray = List<ImageRealm>()
         let url = URL(string: "https://api.unsplash.com/photos/?client_id=\(Constants.accessKey ?? "")")!
         NetworkService.shared.getImagesData(url: url) { data in
             guard let resultData = data
             else {
-               print("error in parsing")
+                print("error in parsing")
                 return
             }
             var image = ImageRealm()
@@ -33,8 +26,8 @@ class Interactor {
                 imagesArray.append(image)
             }
             DispatchQueue.main.async { [weak self] in
-            self?.saveImagesToDataBase(model: imagesArray)
-           completion()
+                self?.saveImagesToDataBase(model: imagesArray)
+                completion()
             }
         }
     }
@@ -45,15 +38,14 @@ class Interactor {
             return
         }
         completion(realmImages)
-    //    delegate?.dataDidReciveImagesFromDataBase(data: realmImages)
     }
     private func saveImagesToDataBase(model: List<ImageRealm>) {
-            do  {
-                try self.realm.write {
-                    self.realm.add(model, update: .modified)
-                }
-            } catch {
-                print("database error")
+        do  {
+            try self.realm.write {
+                self.realm.add(model, update: .modified)
             }
+        } catch {
+            print("database error")
+        }
     }
 }

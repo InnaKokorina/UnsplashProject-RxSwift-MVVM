@@ -8,16 +8,12 @@
 import UIKit
 import RealmSwift
 
-protocol FavoriteViewControllerDelegate: AnyObject {
-    func deteleFromFavorite()
-}
 
 class FavoriteViewController: UIViewController {
     private var collectionView: UICollectionView?
     private var didSetupConstraints = false
-    private var favoriteImages: Results<ImageRealm>?
-    private let realm = try! Realm()
-    weak var delegate: FavoriteViewControllerDelegate?
+    var viewModel = FavoriteViewModel()
+    
     // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,32 +33,26 @@ class FavoriteViewController: UIViewController {
         collectionView?.backgroundColor = .black
     }
     func loadPosts() {
-        collectionView?.reloadData()
+        viewModel.reloadList = { [weak self] ()  in
+            DispatchQueue.main.async {
+                self?.collectionView?.reloadData()
+            }
+        }
     }
 }
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let images = favoriteImages {
-            return images.count
-        } else {
-            return 0
-        }
+        viewModel.getFavoriteImagesCount()
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCollectionViewCell.cellId, for: indexPath) as? FavoriteCollectionViewCell else { return UICollectionViewCell() }
-        if let images = favoriteImages {
+        if let images = viewModel.favoriteImages {
             cell.configure(image: images[indexPath.row])
             cell.deleteButtonTap = {
-                do {
-                    try self.realm.write {
-                        images[indexPath.row].isSaved.toggle()
-                        collectionView.reloadItems(at: [indexPath])
-                        self.delegate?.deteleFromFavorite()
-                    }
-                } catch {
-                    print("Error saving Data context \(error)")
+                self.viewModel.deleteFavorite(index: indexPath.row) {
+                    collectionView.reloadItems(at: [indexPath])
                 }
             }
         }
@@ -80,13 +70,7 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         return CGSize(width: width, height: width)
     }
 }
-// MARK: - HomeViewControllerDelegate
-extension FavoriteViewController: HomeViewControllerDelegate {
-    func saveFavoriteImages(favorite: Results<ImageRealm>?) {
-        favoriteImages = favorite?.filter("isSaved=%@", true)
-        loadPosts()
-    }
-}
+
 // MARK: - updateViewConstraints
 extension FavoriteViewController {
     override func updateViewConstraints() {

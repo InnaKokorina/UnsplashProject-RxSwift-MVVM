@@ -8,29 +8,24 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-    var token = ""
+    
+    var viewModel = TabBarViewModel()
 // MARK: - lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.tintColor = .white
         tabBar.isTranslucent = false
-        self.tabBarItem.imageInsets = UIEdgeInsets(top: -10, left: 0, bottom: -4, right: 0)
-        setupViewControllers()
+        tabBarItem.imageInsets = UIEdgeInsets(top: -10, left: 0, bottom: -4, right: 0)
+        getViewControllers()
         customTabAndNavigationBar()
-        print("tabbar token=\(token)")
     }
     // MARK: - setupViewControllers
-    func setupViewControllers() {
-        let homeVC = HomeViewController()
-        let favoriteVC = FavoriteViewController()
-        let homeNavVC = UINavigationController(rootViewController: homeVC)
-        homeNavVC.navigationBar.backgroundColor = .black
-        let favoriteVCNav = UINavigationController(rootViewController: favoriteVC)
-        homeVC.viewModel = HomeViewModel()
-        homeVC.viewModel?.delegate = favoriteVC
-        favoriteVC.delegate = homeVC
-        homeVC.viewModel?.token = token
-        setViewControllers([homeNavVC, favoriteVCNav], animated: true)
+   private func getViewControllers() {
+        setViewControllers(viewModel.setupViewControllers(), animated: true)   
+    }
+    // MARK: - customTabAndNavigationBar
+    private func customTabAndNavigationBar(){
+        
         guard let items = self.tabBar.items else { return }
         let images = ["house", "bookmark"]
         let title = ["Home", "Saved"]
@@ -38,9 +33,7 @@ class TabBarController: UITabBarController {
             items[index].image = UIImage(systemName: images[index])
             items[index].title = title[index]
         }
-    }
-    // MARK: - customTabAndNavigationBar
-    func customTabAndNavigationBar(){
+        
         if #available(iOS 15, *) {
             let navigationBarAppearance = UINavigationBarAppearance()
             navigationBarAppearance.configureWithOpaqueBackground()

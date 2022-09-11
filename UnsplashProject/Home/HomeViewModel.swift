@@ -12,10 +12,6 @@ import RealmSwift
 protocol HomeViewControllerDelegate: AnyObject {
     func saveFavoriteImages(favorite: Results<ImageRealm>?)
 }
-// протокол для viewModel
-//protocol HomeViewModelProtocol {
-//    var updateViewData: ((ImageRealm) -> ())? { get set}
-//}
 
 class HomeViewModel {
     private var interactor = Interactor()
@@ -28,8 +24,7 @@ class HomeViewModel {
             reloadList()
         }
     }
-    
-    // fetch from database or network
+    // MARK: - internal func
     func fetchData() {
         if realm.isEmpty {
             interactor.getImagesFromNetwork(url: URL(string: "\(Constants.url)\(self.token!)")!) {
@@ -40,7 +35,7 @@ class HomeViewModel {
         }
         delegate?.saveFavoriteImages(favorite: images?.filter("isSaved=%@", true))
     }
-    
+  
     func getImagesCount(images: Results<ImageRealm>?) -> Int {
         if let loadedImages = images {
             return loadedImages.count
@@ -48,40 +43,33 @@ class HomeViewModel {
             return 0
         }
     }
-    // сохраняем в избранное
-    func updateFavorite(loadedImages: Results<ImageRealm>, index: Int, completion: ((Bool) -> ()) ) {
+    func updateFavorite(index: Int, completion: ((Bool) -> ()) ) {
         do {
             try self.realm.write {
-                loadedImages[index].isSaved.toggle()
-                if loadedImages[index].isSaved {
-                    completion(true)
-                } else {
-                    completion(false)
+                if let images = images {
+                    images[index].isSaved.toggle()
+                    if images[index].isSaved {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                    self.delegate?.saveFavoriteImages(favorite: self.images)
                 }
-                self.delegate?.saveFavoriteImages(favorite: self.images)
             }
         } catch {
             print("Error saving Data context \(error)")
         }
     }
-    
-  private func dataDidRecive() {
+    // MARK: - private func
+    private func dataDidRecive() {
         interactor.fetchImagesFromDataBase { results in
             self.images = results.sorted(byKeyPath: "id", ascending: false)
         }
     }
 }
-
-//extension HomeViewModel: ModelManagerDelegate {
-    
-//    func dataDidReciveImagesFromDataBase(data: Results<ImageRealm>) {
-//        self.images = data.sorted(byKeyPath: "id", ascending: false)
-//        print(images)
-////        DispatchQueue.main.async {[weak self] in
-////            self?.tableView.reloadData() // тут должна быть связь с подпиской VC
-////        }
-//
-//    }
-    
-    
-//}
+// MARK: - FavoriteViewModelDelegate
+extension HomeViewModel: FavoriteViewModelDelegate {
+    func deteleFromFavorite(images: Results<ImageRealm>?) {
+        reloadList()
+    }
+}

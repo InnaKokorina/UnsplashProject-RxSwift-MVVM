@@ -6,12 +6,10 @@
 //
 import UIKit
 import SnapKit
-import RealmSwift
 
 class HomeViewController: UIViewController {
    
     var viewModel: HomeViewModel?
-  //  weak var delegate: HomeViewControllerDelegate?
     
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -30,9 +28,7 @@ class HomeViewController: UIViewController {
     }()
     // MARK: - Lifecycle
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-
         tableViewsSetup()
         setupNavItems()
         searchBar.delegate = self
@@ -49,48 +45,38 @@ class HomeViewController: UIViewController {
     }
     private func loadPosts() {
         viewModel?.fetchData()
-            viewModel?.reloadList = { [weak self] ()  in
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
+        viewModel?.reloadList = { [weak self] ()  in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
             }
-    //   tableView.reloadData()
+        }
     }
 }
 // MARK: - UITableViewDataSource, UITableViewDelegate
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
-        print(viewModel.getImagesCount(images: viewModel.images))
        return viewModel.getImagesCount(images: viewModel.images)
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.cellId, for: indexPath) as? HomeTableViewCell else { return UITableViewCell() }
         
         if let loadedImages = viewModel?.images {
             cell.configure(image: loadedImages[indexPath.row])
             cell.saveButtonTap = {
-                self.viewModel?.updateFavorite(loadedImages: loadedImages, index: indexPath.row) { saved in
+                self.viewModel?.updateFavorite(index: indexPath.row) { saved in
                     if saved {
                         cell.favoriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
                     } else {
                         cell.favoriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
                     }
-            //        self.delegate?.saveFavoriteImages(favorite: loadedImages)
                 }
                 
             }
         }
         return cell
-    }
-}
-// MARK: - ModelManagerDelegate
-
-extension HomeViewController: FavoriteViewControllerDelegate {
-    func deteleFromFavorite() {
-        DispatchQueue.main.async {[weak self] in
-            self?.tableView.reloadData()
-        }
     }
 }
 // MARK: - navigationItems
