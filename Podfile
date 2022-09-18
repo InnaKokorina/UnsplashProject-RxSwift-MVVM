@@ -10,4 +10,7 @@ pod 'RealmSwift', '10.27.0'
 pod 'SnapKit', '~> 5.0.0'
 pod 'Kingfisher'
 pod 'Alamofire', '~> 5.4'
+pod 'RxSwift'
+pod 'RxCocoa'
+pod 'RxDataSources'
 end

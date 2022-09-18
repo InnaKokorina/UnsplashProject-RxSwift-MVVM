@@ -7,7 +7,12 @@
 
 import Foundation
 
-class AuthViewModel {
+protocol AuthViewModelProtocol {
+    func webWiewLoad(completion: ((URLRequest) ->()))
+    func getQueryStringParameter(url: String, param: String) -> String?
+    func fetchToken(code: String, completion: @escaping (String) -> Void)
+}
+class AuthViewModel: AuthViewModelProtocol {
     private var authService = AuthService()
     
     func webWiewLoad(completion: ((URLRequest) ->())) {

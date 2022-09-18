@@ -7,6 +7,8 @@
 
 import Foundation
 import RealmSwift
+import RxSwift
+import RxCocoa
 
 protocol FavoriteViewModelProtocol {
     var reloadList: (() -> ()) { get set }

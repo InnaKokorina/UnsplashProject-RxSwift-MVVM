@@ -7,10 +7,14 @@
 
 import UIKit
 import Kingfisher
+import RxSwift
+import RxCocoa
 
 class HomeTableViewCell: UITableViewCell {
+    
     static var cellId = "HomeTableViewCell"
     var saveButtonTap: (() -> Void)?
+    
     private let photoImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
@@ -64,6 +68,8 @@ class HomeTableViewCell: UITableViewCell {
     @objc func savePressed() {
         saveButtonTap?()
     }
+    
+    
 }
 // MARK: - constraints
 extension HomeTableViewCell {

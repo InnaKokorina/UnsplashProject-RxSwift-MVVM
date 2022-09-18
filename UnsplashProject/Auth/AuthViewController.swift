@@ -7,6 +7,8 @@
 
 import UIKit
 import WebKit
+import RxSwift
+import RxCocoa
 
 class AuthViewController: UIViewController {
     private var didSetupConstraints = false
@@ -38,32 +40,38 @@ class AuthViewController: UIViewController {
         let webView = WKWebView()
         return webView
     }()
-    var viewModel = AuthViewModel()
+    var viewModel: AuthViewModelProtocol?
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = AuthViewModel()
         addViews()
         view.setNeedsUpdateConstraints()
         webView.navigationDelegate = self
+        setupRx()
     }
     
-    func addViews() {
+    private func addViews() {
         view.addSubview(webView)
         view.addSubview(logoImage)
         view.addSubview(welcomeLabel)
         view.addSubview(loginButton)
         webView.isHidden = true
-        loginButton.addTarget(self, action: #selector(loginTap), for: .touchUpInside)
     }
-
-    @objc func loginTap() {
-        webView.isHidden = false
-        welcomeLabel.isHidden = true
-        loginButton.isHidden = true
-        logoImage.isHidden = true
-        viewModel.webWiewLoad { request in
-            webView.load(request)
-        }
+    
+    private func setupRx() {
+    loginButton.rx.tap
+        .bind {
+            self.webView.isHidden = false
+            self.welcomeLabel.isHidden = true
+            self.loginButton.isHidden = true
+            self.logoImage.isHidden = true
+            self.viewModel?.webWiewLoad { request in
+                self.webView.load(request)
+            }
+        }.disposed(by: disposeBag)
+    
     }
 }
 // MARK: - setConstraints
@@ -100,10 +108,10 @@ extension AuthViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         guard
             let currentURL = webView.url?.absoluteString,
-            let code = viewModel.getQueryStringParameter(url: currentURL, param: "code")
+            let code = viewModel?.getQueryStringParameter(url: currentURL, param: "code")
         else {return}
-        viewModel.fetchToken(code: code) { [weak self] data in
-            
+        
+        viewModel?.fetchToken(code: code) { [weak self] data in
             let tabBarController = TabBarController()
             tabBarController.viewModel.token = data
             tabBarController.modalPresentationStyle = .fullScreen
